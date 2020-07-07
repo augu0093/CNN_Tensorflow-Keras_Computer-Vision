@@ -20,27 +20,28 @@ class KerasModel:
         # Define data for making final model
         self.X, self.y = digit_data.load_digit_mnist(test=False, val_data=False)
 
-    # Create the skeleton of the Keras CNN
-    def build_empty_cnn(self):
+        # Model
+        self.model = None
+
+    # Create and fit the Keras CNN
+    def build_and_fit_cnn(self, predictions=False):
 
         # Creating a sequential model
-        model = Sequential()
+        self.model = Sequential()
 
         # Adding the layers of the model
-        model.add(Conv2D(28, kernel_size=(3, 3), input_shape=input_shape))  # Kernel size: 3x3
-        model.add(MaxPooling2D(pool_size=(2, 2)))  # Pooling size: 2x2
-        model.add(Flatten())  # Flattening the 2D arrays for fully connected layers
-        model.add(Dense(128, activation=tf.nn.relu))  # Dense layer: 128 neurons
-        model.add(Dropout(0.2))  # Dropout rate: 0.2
-        model.add(Dense(10, activation=tf.nn.softmax))  # Last dense layer needs 10 neurons, one for each class 0-9
+        self.model.add(Conv2D(28, kernel_size=(3, 3), input_shape=(28, 28, 1)))  # Kernel size: 3x3
+        self.model.add(MaxPooling2D(pool_size=(2, 2)))  # Pooling size: 2x2
+        self.model.add(Flatten())  # Flattening the 2D arrays for fully connected layers
+        self.model.add(Dense(128, activation=tf.nn.relu))  # Dense layer: 128 neurons
+        self.model.add(Dropout(0.2))  # Dropout rate: 0.2
+        self.model.add(Dense(10, activation=tf.nn.softmax))  # Last dense layer needs 10 neurons, one for each class 0-9
 
+        # Compile the model
+        self.model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-
-
-
-
-
-
-
-
-input_shape = (28, 28, 1)
+        # Fit the CNN to either split or full training set
+        if predictions:
+            return self.model.fit(x=self.X, y=self.y, epochs=10)
+        else:
+            return self.model.fit(x=self.X_train, y=self.y_train, epochs=10), self.X_val, self.y_val
