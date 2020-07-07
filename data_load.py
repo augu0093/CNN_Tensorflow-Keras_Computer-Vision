@@ -9,10 +9,6 @@ from sklearn.model_selection import train_test_split
 
 import tensorflow as tf
 
-def load_digit_mnist():
-
-    df_train = pd.read_csv(train_path)
-
 
 class DigitDataMNIST:
 
@@ -25,18 +21,24 @@ class DigitDataMNIST:
         self.X_val = None
         self.y_val = None
         self.test_data = None
-        # self.transform = transform
 
     # Load the data, either for training the model, validation trained performance or producing Kaggle submission
     def load_digit_mnist(self, test=False, val_data=False):
+
         # Load training data and split label from data
         train_data = pd.read_csv(self.train_path)
-        self.X_train = np.asarray(train_data.iloc[:, 1:]).reshape(-1, 28, 28)  # .astype(float);
+        # Both training data (not labels) and test data need to be 4 dimension for Keras to work with it
+        # That means first dim is number of digits, second and third are image pixels 28x28 and fourth is redundant
+        self.X_train = np.asarray(train_data.iloc[:, 1:]).reshape(-1, 28, 28, 1)
         self.y_train = np.asarray(train_data.iloc[:, 0])
 
         # Load test data
         test_data = pd.read_csv(self.test_path)
-        self.test_data = np.asarray(test_data.iloc[:, 0:]).reshape(-1, 28, 28)
+        self.test_data = np.asarray(test_data.iloc[:, 0:]).reshape(-1, 28, 28, 1)
+
+        # The data is normalized by dividing the RGB values with the max RGB value
+        self.X_train = (self.X_train.astype('float32') / 255)
+        self.test_data = (self.test_data.astype('float32') / 255)
 
         # Return test data for Kaggle submission
         if test:
@@ -65,12 +67,3 @@ class DigitDataMNIST:
 
     def __TestShape__(self):
         return self.test_data.shape
-
-    # def __getitem__(self, idx):
-    #     item = self.X[idx]
-    #     label = self.Y[idx]
-    #
-    #     if self.transform:
-    #         item = self.transform(item)
-    #
-    #     return (item, label)

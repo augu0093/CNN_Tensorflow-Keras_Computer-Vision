@@ -1,4 +1,4 @@
-# computer-vision
+# Computer-Vision using CNN, Tensorflow (Keras API)
 By August Semrau Andersen
 
 This project is an entry into the Kaggle competition 'Digit Recognizer'.  
@@ -10,8 +10,9 @@ The intent with the project is to display proficiency in using Neural Netowrk st
 ### Scripts
 The following scripts are used for completing the competition.
 
-1.  data_load.py loads the MNIST data and converts it from .csv format to matrix structure.
-2.
+1. data_load.py loads the MNIST data and converts it from .csv format to matrix structure.
+2. visualize.py is a simple reasurance that data is loaded correctly, and can further display the different hand written digits.
+3. build_keras_cnn.py
 
 
 

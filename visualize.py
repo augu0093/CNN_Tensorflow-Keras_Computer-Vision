@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 from data_load import DigitDataMNIST
 
 
-
 if __name__ == '__main__':
 
     # Define class for loading
@@ -19,6 +18,7 @@ if __name__ == '__main__':
     print(X_val.shape)
     print(y_train_s.shape)
     print(y_val.shape)
+    # print(y_train_s)
 
     # Load data for building final model
     X_train_l, y_train_l = digit_data.load_digit_mnist(test=False, val_data=False)
@@ -30,5 +30,7 @@ if __name__ == '__main__':
     print(X_test.shape)
 
     # Use matplotlib for generating an image of a given digit from the data
-    plt.imshow(X_train_s[0], cmap='Greys')
+    X_train_3dim = X_train_s.reshape(X_train_s.shape[0], 28, 28)
+    print(X_train_3dim.shape)
+    plt.imshow(X_train_3dim[0], cmap='Greys')
     plt.show()
