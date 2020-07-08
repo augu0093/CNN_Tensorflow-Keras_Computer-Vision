@@ -4,8 +4,11 @@ This script builds the CNN for image classification
 """
 
 from data_load import DigitDataMNIST
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
+# from tensorflow.keras.models import Sequential
+from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Dropout, Flatten, MaxPooling2D
 
 
@@ -39,9 +42,14 @@ class KerasModel:
 
         # Compile the model
         self.model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-
+        # print(self.model.summary())
         # Fit the CNN to either split or full training set
         if predictions:
+            print('Fitting model:')
             return self.model.fit(x=self.X, y=self.y, epochs=10)
         else:
-            return self.model.fit(x=self.X_train, y=self.y_train, epochs=10), self.X_val, self.y_val
+            print('Fitting model:')
+            self.model.fit(x=self.X_train, y=self.y_train, epochs=1)
+            print('Evaluation:')
+            self.model.evaluate(self.X_val, self.y_val)
+            return self.model, self.X_val, self.y_val

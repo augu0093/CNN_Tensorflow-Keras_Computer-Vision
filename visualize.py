@@ -29,7 +29,7 @@ if __name__ == '__main__':
     X_test = digit_data.load_digit_mnist(test=True, val_data=False)
     print(X_test.shape)
 
-    # Use matplotlib for generating an image of a given digit from the data
+    # Use matplotlib for generating an image of a given digit from the data, this is a '6'
     X_train_3dim = X_train_s.reshape(X_train_s.shape[0], 28, 28)
     print(X_train_3dim.shape)
     plt.imshow(X_train_3dim[0], cmap='Greys')
