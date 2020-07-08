@@ -6,17 +6,26 @@ This script makes predictions for submission into the Kaggle competition.
 import pandas as pd
 from data_load import DigitDataMNIST
 from build_keras_cnn import KerasModel
+from datetime import datetime
 
-
-def csv_saver(predictions, type):
+def csv_saver(predictions, name):
 
     # Indexes for 28000 test images
     image_index = list(range(1, 28001))
 
-    # Make dataframe from predictions and indexes
+    # Make data frame from predictions and indexes
     df = pd.DataFrame(list(zip(image_index, predictions)), columns=['ImageId', 'Label'], index=None)
-    # predictions_csv = df.to_csv(index=False)
-    output_filename = 'predictions/predictions_{}.csv'.format(type)
+
+    # Name the file the timestamp for differentiation
+    if name == 'Time':
+        time_now = datetime.now()
+        day, hour, minute = str(time_now.day), str(time_now.hour), str(time_now.minute)
+        time = day + '-' + hour + '-' + minute
+        name = time
+    # Define output filename
+    output_filename = 'predictions/predictions_{}.csv'.format(name)
+
+    # Save to .csv
     return df.to_csv(output_filename, index=False)
 
 
@@ -37,16 +46,16 @@ if __name__ == '__main__':
     print('Model history: ', model.history)
 
     # Make predictions
-    pred = model.predict(test_data)
-    print('Pred shape: ', pred.shape)
+    pred_labels = model.predict(test_data)
+    print('Pred shape: ', pred_labels.shape)
     predictions = []
-    for row in pred:
+    for row in pred_labels:
         predictions.append(row.argmax())
 
     print(predictions)
     print(len(predictions))
-    csv_saver(predictions=predictions, type="4")
-    # print(predictions.argmax())
+    csv_saver(predictions=predictions, name='Time')
+
 
 
 
