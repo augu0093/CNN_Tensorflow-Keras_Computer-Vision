@@ -7,7 +7,6 @@ from data_load import DigitDataMNIST
 import os
 os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import tensorflow as tf
-# from tensorflow.keras.models import Sequential
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Dropout, Flatten, MaxPooling2D
 
@@ -36,6 +35,7 @@ class KerasModel:
         self.model.add(Conv2D(28, kernel_size=(3, 3), input_shape=(28, 28, 1)))  # Kernel size: 3x3
         self.model.add(MaxPooling2D(pool_size=(2, 2)))  # Pooling size: 2x2
         self.model.add(Flatten())  # Flattening the 2D arrays for fully connected layers
+        # self.model.add(Dense(784, activation=tf.nn.relu))  # Dense layer: 784 neurons
         self.model.add(Dense(128, activation=tf.nn.relu))  # Dense layer: 128 neurons
         self.model.add(Dropout(0.2))  # Dropout rate: 0.2
         self.model.add(Dense(10, activation=tf.nn.softmax))  # Last dense layer needs 10 neurons, one for each class 0-9
@@ -46,7 +46,8 @@ class KerasModel:
         # Fit the CNN to either split or full training set
         if predictions:
             print('Fitting model:')
-            return self.model.fit(x=self.X, y=self.y, epochs=10)
+            self.model.fit(x=self.X, y=self.y, epochs=10)
+            return self.model
         else:
             print('Fitting model:')
             self.model.fit(x=self.X_train, y=self.y_train, epochs=10)

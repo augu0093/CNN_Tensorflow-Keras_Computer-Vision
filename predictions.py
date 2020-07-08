@@ -33,7 +33,7 @@ if __name__ == '__main__':
     keras_model = KerasModel()
 
     # Build and fit CNN to tune-able data set
-    model, X_val, y_val = keras_model.build_and_fit_cnn(predictions=False)
+    model = keras_model.build_and_fit_cnn(predictions=True)
     print('Model history: ', model.history)
 
     # Make predictions
@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     print(predictions)
     print(len(predictions))
-    csv_saver(predictions=predictions, type="2")
+    csv_saver(predictions=predictions, type="4")
     # print(predictions.argmax())
 
 

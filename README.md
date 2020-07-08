@@ -6,7 +6,7 @@ https://www.kaggle.com/c/digit-recognizer/data.
 
 The goal of the competition is to correctly classify handwritten digits from the MNIST data set using computer vision.
 
-Final classification accuracy on 28000 test MNIST digits: 0.98110.
+Final classification accuracy on 28000 test MNIST digits: 0.98242.
 
 The intent with this project is to display proficiency in using Neural Netowrk structures in a practical context.  
 
@@ -24,12 +24,12 @@ The following scripts are used for completing the competition.
 ### CNN
 
 **Layer** structure of the final sequential Keras model was as follows:
-- Convolutional layer, with kernel size 3x3
-- Max Pooling layer, with size 2x2
-- Flattening layer
-- Dense layer, relu activation, with 128 neuron  
-- Dropout layer, with dropout-rate 0.2
-- Dense layer, softmax activation, with 10 neurons (one for each class)
+1. Convolutional layer, with kernel size 3x3
+2. Max Pooling layer, with size 2x2
+3. Flattening layer
+4. Dense layer, relu activation, with 128 neuron  
+5. Dropout layer, with dropout-rate 0.2
+6. Dense layer, softmax activation, with 10 neurons (one for each class)
 
 **Compiling** the model is done using Adam optimization, and the loss is crossentropy.
 
