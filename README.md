@@ -1,11 +1,14 @@
 # Computer-Vision using CNN, Tensorflow (Keras API)
 By August Semrau Andersen
 
-This project is an entry into the Kaggle competition 'Digit Recognizer'.  
+This project was an entry into the Kaggle competition 'Digit Recognizer'.  
 https://www.kaggle.com/c/digit-recognizer/data.  
-The goal of the competition is correctly classify handwritten numbers from the MNIST data set using computer vision.
 
-The intent with thiss project is to display proficiency in using Neural Netowrk structures in a practical context.  
+The goal of the competition is to correctly classify handwritten digits from the MNIST data set using computer vision.
+
+Final classification accuracy on 28000 test MNIST digits: 0.98110.
+
+The intent with this project is to display proficiency in using Neural Netowrk structures in a practical context.  
 
 ### Scripts
 The following scripts are used for completing the competition.
@@ -19,7 +22,16 @@ The following scripts are used for completing the competition.
 
 
 ### CNN
-The following is a short description of the implemented Convolutional Neural Network.
 
+**Layer** structure of the final sequential Keras model was as follows:
+- Convolutional layer, with kernel size 3x3
+- Max Pooling layer, with size 2x2
+- Flattening layer
+- Dense layer, relu activation, with 128 neuron  
+- Dropout layer, with dropout-rate 0.2
+- Dense layer, softmax activation, with 10 neurons (one for each class)
 
+**Compiling** the model is done using Adam optimization, and the loss is crossentropy.
+
+**Training** of the model is performed over 10 epochs.
 

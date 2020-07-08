@@ -49,7 +49,7 @@ class KerasModel:
             return self.model.fit(x=self.X, y=self.y, epochs=10)
         else:
             print('Fitting model:')
-            self.model.fit(x=self.X_train, y=self.y_train, epochs=1)
-            print('Evaluation:')
-            self.model.evaluate(self.X_val, self.y_val)
+            self.model.fit(x=self.X_train, y=self.y_train, epochs=10)
+            # print('Evaluation:')
+            # self.model.evaluate(self.X_val, self.y_val)
             return self.model, self.X_val, self.y_val
