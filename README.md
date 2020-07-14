@@ -6,7 +6,7 @@ https://www.kaggle.com/c/digit-recognizer/data.
 
 The goal of the competition is to correctly classify handwritten digits from the MNIST data set using computer vision.
 
-Final classification accuracy achieved on 28000 test MNIST images: 0.99153, pretty decent.
+Final classification accuracy achieved on 28000 test MNIST images: 0.99153, ranking top 30%.
 
 The intent with this project was to learn the basics of computer vision and display proficiency in using Neural Netowrk structures in a practical context.  
 
